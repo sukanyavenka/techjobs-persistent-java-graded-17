@@ -1,58 +1,75 @@
 package org.launchcode.techjobs.persistent.models;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class Job {
+public class Job extends AbstractEntity {
 
-    @Id
-    @GeneratedValue
-    private int id;
 
-    private String name;
-    private String employer;
-    private String skills;
+    @ManyToMany
+    private List<Skill> skills;
 
+    // private String employers;
+    //   private String skills;
+
+
+    @ManyToOne
+    //@JoinColumn(name="employer_id")
+
+    private Employer employer;
 
     public Job() {
     }
 
     // Initialize the id and value fields.
-    public Job(String anEmployer, String someSkills) {
-        super();
-        this.employer = anEmployer;
+    public Job( Employer employer,List<Skill> someSkills) {
+        //super();
+        this.employer = employer;
         this.skills = someSkills;
     }
 
     // Getters and setters.
-    
-    public String getName() {
-        return name;
-    }
 
-    public void setName(String name) {
-        this.name = name;
-    }
 
-    public String getEmployer() {
+//    public String getEmployer() {
+//        return employers;
+//    }
+//
+//    public void setEmployer(String employer) {
+//        this.employers = employer;
+//    }
+
+    //  public String getEmployers() {return employers;}
+
+    // public void setEmployers(String employers) {this.employers = employers;}
+
+    public Employer getEmployer() {
         return employer;
     }
 
-    public void setEmployer(String employer) {
+    public void setEmployer(Employer employer) {
         this.employer = employer;
     }
 
-    public String getSkills() {
+//    public String getSkills() {
+//        return skills;
+//    }
+//
+//    public void setSkills(String skills) {
+//        this.skills = skills;
+//    }
+
+    public List<Skill> getSkills() {
         return skills;
     }
 
-    public void setSkills(String skills) {
+    public void setSkills(List<Skill> skills) {
         this.skills = skills;
     }
+    }
 
-}
